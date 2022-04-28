@@ -1,10 +1,11 @@
 #2 beta
 
 
-import sys, re
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from pickle import TRUE
+import sys, re, time
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QDialog
 from nc_editor import Ui_Hauptfenster
-from popup1 import Ui_popup1
+from PopUpBracketCheck import Ui_PopUpBracketCheck
 
 
 
@@ -20,16 +21,16 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
         self.pb_save_as.clicked.connect(save_file)
           
     
-class PopUp(QMainWindow, Ui_popup1):
+class PopUp(QDialog, Ui_PopUpBracketCheck):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.pb_popup_OK.clicked.connect()
+        
 
-PopUp.s
+    
 
 # hier werden Funktionen definiert
-
+        
 
 def check_config():
         if window.cb_satznummern.isChecked() and not window.cb_klammern.isChecked():
@@ -75,26 +76,32 @@ def correct_lines():
     pass
 
 def check_brackets():
+    Instanz_PopUP = PopUp()
     i = 0
     bo = 0  #Klammer wird geoeffnet
     bc = 0  #Klammer wird geschlossen
     pattern = "("
     Liste_Anzahl_bo = []
+    Fehlerzeilennummer = []
 
     for s in Satznummern_liste:
         x = re.findall("\(", Satznummern_liste[i])
-           
         y = re.findall("\)", Satznummern_liste[i])
         
         if not len(x) == len(y):
-            while 
-            # print("Fehler in Zeile "+str(i+1))
-            
-            window2 = PopUp()
-            window2.show()
-            
+            Fehlerzeilennummer.append("Fehler in Zeile"+str(i+1)+"\n")
         
         i += 1
+    
+    
+    if len(Fehlerzeilennummer) > 0:
+        str2 = ''.join(Fehlerzeilennummer)
+        Instanz_PopUP.tb_popup.setText(str2)
+        Instanz_PopUP.exec()
+           
+            
+        
+        
         
 def save_file(): # close and save file
     save_file_instance = QFileDialog.getSaveFileName(None, "NC Programme speichern unter", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
