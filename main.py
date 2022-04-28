@@ -4,6 +4,7 @@
 import sys, re
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from nc_editor import Ui_Hauptfenster
+from popup1 import Ui_popup1
 
 
 
@@ -18,7 +19,14 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
         self.pb_check_program.clicked.connect(check_config)
         self.pb_save_as.clicked.connect(save_file)
           
-        
+    
+class PopUp(QMainWindow, Ui_popup1):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pb_popup_OK.clicked.connect()
+
+PopUp.s
 
 # hier werden Funktionen definiert
 
@@ -34,7 +42,6 @@ def check_config():
             correct_lines()
             check_brackets()
 
-
 def check_file(): # open file
     fname = QFileDialog.getOpenFileName(None, "NC Programme auswählen", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
     window.le_input.setText(fname[0])
@@ -49,9 +56,6 @@ def check_file(): # open file
         f_contents_lines = rf_2.readlines()
         Satznummern_liste = f_contents_lines
         
-
-
-
 def correct_lines():
     line_offset = 0
     i = 0
@@ -83,48 +87,20 @@ def check_brackets():
         y = re.findall("\)", Satznummern_liste[i])
         
         if not len(x) == len(y):
-            print("Fehler in Zeile "+str(i+1))
+            while 
+            # print("Fehler in Zeile "+str(i+1))
+            
+            window2 = PopUp()
+            window2.show()
             
         
         i += 1
-    
         
-        
-    
-        # if re.match(pattern, Satznummern_liste[i]):
-        #     bo += 1
-        # if re.match(pattern, Satznummern_liste[i]):
-        #     bc += 1
-        
-        # if not bo == bc:
-        #     print("Fehler bei Zeile:" + (i+1))
-            
-        
- 
-
-
-
-
-
-
-
-
-
-
-
-
 def save_file(): # close and save file
     save_file_instance = QFileDialog.getSaveFileName(None, "NC Programme speichern unter", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
     with open(save_file_instance[0], 'w') as save_new_text:
         for item in str1:
             save_new_text.write("%s" % item)
-
-
-
-
-
-
-
 
 
 
