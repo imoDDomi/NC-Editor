@@ -1,4 +1,6 @@
 
+
+
 import sys, re
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from nc_editor import Ui_Hauptfenster
