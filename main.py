@@ -45,11 +45,7 @@ def check_config():
             check_IDS()
 
         if window.cb_klammern.isChecked():
-            check_brackets()    
-
-
-        
-        
+            check_brackets()           
 
 def open_file(): # open file
     global Satznummern_liste
@@ -66,11 +62,6 @@ def open_file(): # open file
     with open(fname[0], "r") as rf_2:    
         Satznummern_liste = rf_2.readlines()
         
-
-
-
-
-
 
 
 
@@ -94,8 +85,6 @@ def correct_lines():
     Satznummern_string = ''.join(Liste_fertig) 
     window.textBrowser.setText(Satznummern_string)
     
-    
-
 def check_brackets():  # brav
     global Satznummern_liste
     global Satznummern_string
@@ -122,8 +111,6 @@ def check_brackets():  # brav
         Instanz_PopUP.tb_popup.setText(str2)
         Instanz_PopUP.exec()
 
-
-
 def check_IDS():
     global Satznummern_liste
     global Satznummern_string
@@ -148,9 +135,6 @@ def check_IDS():
     window.textBrowser.setText(Satznummern_string)
     
               
-
-
-
 
                
 def save_file(): # close and save file
