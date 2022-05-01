@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>icons/warning.png</normaloff>icons/warning.png</iconset>
+    <normaloff>icons/alert.png</normaloff>icons/alert.png</iconset>
   </property>
   <widget class="QDialogButtonBox" name="pb_popup_OK">
    <property name="geometry">

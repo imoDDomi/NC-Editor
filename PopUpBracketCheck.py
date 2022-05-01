@@ -24,7 +24,7 @@ class Ui_PopUpBracketCheck(object):
             PopUpBracketCheck.setObjectName(u"PopUpBracketCheck")
         PopUpBracketCheck.resize(384, 272)
         icon = QIcon()
-        icon.addFile(u"icons/warning.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"icons/alert.png", QSize(), QIcon.Normal, QIcon.Off)
         PopUpBracketCheck.setWindowIcon(icon)
         self.pb_popup_OK = QDialogButtonBox(PopUpBracketCheck)
         self.pb_popup_OK.setObjectName(u"pb_popup_OK")
