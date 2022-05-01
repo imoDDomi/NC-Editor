@@ -1,10 +1,6 @@
-#2 beta
-
-
-from pickle import TRUE
 import sys, re, time
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QDialog
-from nc_editor_new_Design import Ui_Hauptfenster
+from nc_editor_mainwindow import Ui_Hauptfenster
 from PopUpBracketCheck import Ui_PopUpBracketCheck
 
 
@@ -88,7 +84,6 @@ def correct_lines():
 def check_brackets():  # brav
     global Satznummern_liste
     global Satznummern_string
-    window.lb_saved.setHidden(True)
     Instanz_PopUP = PopUp()
     i = 0
     bo = 0  #Klammer wird geoeffnet
