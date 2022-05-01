@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="asdf">
+    <file>Haken.png</file>
+  </qresource>
+</RCC>
