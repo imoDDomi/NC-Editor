@@ -8,6 +8,7 @@ from PopUpBracketCheck import Ui_PopUpBracketCheck
 
 
 
+
 class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. programmiert, alles was auf geerbte Klasse Ui_Hauptfenster zurückgreift
     def __init__(self):
         super().__init__()
