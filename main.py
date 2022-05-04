@@ -4,7 +4,8 @@ from nc_editor_mainwindow import Ui_Hauptfenster
 from PopUpBracketCheck import Ui_PopUpBracketCheck
 
 
-
+#in exe umwandeln:
+#auto-py-to-exe
 
 
 
@@ -115,12 +116,12 @@ def check_IDS():
     i = 0
     x = []
     Liste_fertig = []
-    pattern = "^IDS\s=\s\d*"
+    pattern = "^IDS=\s?\d*"
     
 
     
     for s in Satznummern_liste:
-        x = re.sub(pattern, "IDS " + "= " + str(window.sb_startnummer.value() + line_offset), Satznummern_liste[i])
+        x = re.sub(pattern, "IDS" + "=" + str(window.sb_startnummer.value() + line_offset), Satznummern_liste[i])
         Liste_fertig.append(x)
         if re.match(pattern, Satznummern_liste[i]):
             line_offset += window.sb_schrittweite.value()
