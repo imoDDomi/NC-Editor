@@ -1,4 +1,4 @@
-import sys, re, time
+import sys, re, time, os
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QDialog
 from nc_editor_mainwindow import Ui_Hauptfenster
 from PopUpBracketCheck import Ui_PopUpBracketCheck
@@ -48,18 +48,27 @@ def check_config():
 def open_file(): # open file
     global Satznummern_liste
     global Satznummern_string
-    fname = QFileDialog.getOpenFileName(None, "NC Programme auswählen", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
-    window.le_input.setText(fname[0])
     
-    
-    with open(fname[0], "r") as rf:
-        Satznummern_string = rf.read()
-        window.textBrowser.setText(Satznummern_string)
+
+    if window.rb_file.isChecked():
+        fname = QFileDialog.getOpenFileName(None, "NC Programme auswählen", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
+        window.le_input.setText(fname[0])
         
-    
-    with open(fname[0], "r") as rf_2:    
-        Satznummern_liste = rf_2.readlines()
         
+        with open(fname[0], "r") as rf:
+            Satznummern_string = rf.read()
+            window.textBrowser.setText(Satznummern_string)
+            
+        
+        with open(fname[0], "r") as rf_2:    
+            Satznummern_liste = rf_2.readlines()
+    if window.rb_directory.isChecked():
+        files = QFileDialog.getExistingDirectory()
+        print(files)
+        with open(fname[0], "r") as rf:
+            Satznummern_string = rf.read()
+            window.textBrowser.setText(Satznummern_string)
+        pass   
 
 
 
