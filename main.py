@@ -35,7 +35,8 @@ class PopUp(QDialog, Ui_PopUpBracketCheck):
 
 
 def check_config():
-    
+    if window.rb_file.isChecked():
+
         if window.cb_satznummern.isChecked():
             correct_lines()
            
@@ -43,11 +44,21 @@ def check_config():
             check_IDS()
 
         if window.cb_klammern.isChecked():
-            check_brackets()           
+            check_brackets()      
+
+    if window.rb_directory.isChecked():
+
+        if window.cb_satznummern.isChecked():
+
+            correct_lines_in_dir()
+
+
 
 def open_file(): # open file
     global Satznummern_liste
     global Satznummern_string
+    global files_Satznummern_liste
+
     
 
     if window.rb_file.isChecked():
@@ -63,14 +74,80 @@ def open_file(): # open file
         with open(fname[0], "r") as rf_2:    
             Satznummern_liste = rf_2.readlines()
     if window.rb_directory.isChecked():
-        files = QFileDialog.getExistingDirectory()
-        print(files)
-        with open(fname[0], "r") as rf:
-            Satznummern_string = rf.read()
-            window.textBrowser.setText(Satznummern_string)
-        pass   
+        files = QFileDialog.getExistingDirectory(None, "NC Programm Ordner auswählen", "C:/Users/domin/Desktop" )
+        window.le_input.setText(files)
+        files_Satznummern_liste = os.listdir(files)
+        # print(files_content)
+        loop_directories(files)
 
 
+        
+
+
+
+
+
+def loop_directories(path):
+    # global Satznummern_liste
+    # global Satznummern_string
+    
+    global directory_path
+    directory_path = path + "/"
+    
+
+    for i in files_Satznummern_liste:
+
+        # print(directory_path + i)
+
+        # with open(directory_path + i, "r") as q:    
+        #     lokal_Satznummern_liste = q.readlines()
+        zeilenumbruch = "\n"
+        w = zeilenumbruch.join(files_Satznummern_liste)
+        window.textBrowser.setText(w)
+
+
+
+
+
+
+def correct_lines_in_dir():
+
+    global files_Satznummern_liste
+    global directory_path
+
+
+    line_offset = 0
+    i = 0
+    x = []
+    Liste_fertig = []
+    
+    for i in files_Satznummern_liste:
+        # print(i)
+
+        with open(directory_path + i, "r") as q:    
+            lokal_Satznummern_liste = q.readlines()
+
+        print(lokal_Satznummern_liste)
+
+
+        # for s in lokal_Satznummern_liste:
+        #     x = re.sub("N"+"\d"+"\d"+"\d*", "N" + str(window.sb_startnummer.value() + line_offset), lokal_Satznummern_liste[i])
+        #     Liste_fertig.append(x)
+        #     if re.match("N"+"\d"+"\d"+"\d*", lokal_Satznummern_liste[i]):
+        #         line_offset += window.sb_schrittweite.value()
+        #     i += 1
+        # lokal_Satznummern_liste = Liste_fertig
+        # lokal_Satznummern_string = ''.join(Liste_fertig) # für anzeige
+        # window.textBrowser.setText(Satznummern_string)
+    
+    
+    
+    
+    
+    
+    
+    
+    pass
 
 def correct_lines():
     global Satznummern_liste
