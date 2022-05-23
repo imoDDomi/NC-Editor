@@ -120,34 +120,35 @@ def correct_lines_in_dir():
     i = 0
     x = []
     Liste_fertig = []
-    
+    l = 0
+
+
     for i in files_Satznummern_liste:
-        # print(i)
+        
 
         with open(directory_path + i, "r") as q:    
             lokal_Satznummern_liste = q.readlines()
 
-        print(lokal_Satznummern_liste)
+        line_offset = 0
+        l = 0
+        for s in lokal_Satznummern_liste:
+            x = re.sub("N"+"\d"+"\d"+"\d*", "N" + str(window.sb_startnummer.value() + line_offset), lokal_Satznummern_liste[l])
+            Liste_fertig.append(x)
+            if re.match("N"+"\d"+"\d"+"\d*", lokal_Satznummern_liste[l]):
+                line_offset += window.sb_schrittweite.value()
+            
+            l += 1
+            s = Liste_fertig
+        Liste_fertig = []
+         
+        with open(directory_path + i, 'w') as save_new_text:
+            for item in s:
+                save_new_text.write("%s" % item)
+        
+        
+        
 
 
-        # for s in lokal_Satznummern_liste:
-        #     x = re.sub("N"+"\d"+"\d"+"\d*", "N" + str(window.sb_startnummer.value() + line_offset), lokal_Satznummern_liste[i])
-        #     Liste_fertig.append(x)
-        #     if re.match("N"+"\d"+"\d"+"\d*", lokal_Satznummern_liste[i]):
-        #         line_offset += window.sb_schrittweite.value()
-        #     i += 1
-        # lokal_Satznummern_liste = Liste_fertig
-        # lokal_Satznummern_string = ''.join(Liste_fertig) # für anzeige
-        # window.textBrowser.setText(Satznummern_string)
-    
-    
-    
-    
-    
-    
-    
-    
-    pass
 
 def correct_lines():
     global Satznummern_liste
