@@ -77,7 +77,6 @@ def open_file(): # open file
         files = QFileDialog.getExistingDirectory(None, "NC Programm Ordner auswählen", "C:/Users/domin/Desktop" )
         window.le_input.setText(files)
         files_Satznummern_liste = os.listdir(files)
-        # print(files_content)
         loop_directories(files)
 
 
@@ -88,19 +87,13 @@ def open_file(): # open file
 
 
 def loop_directories(path):
-    # global Satznummern_liste
-    # global Satznummern_string
-    
     global directory_path
     directory_path = path + "/"
     
 
     for i in files_Satznummern_liste:
 
-        # print(directory_path + i)
-
-        # with open(directory_path + i, "r") as q:    
-        #     lokal_Satznummern_liste = q.readlines()
+        
         zeilenumbruch = "\n"
         w = zeilenumbruch.join(files_Satznummern_liste)
         window.textBrowser.setText(w)
