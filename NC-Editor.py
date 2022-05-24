@@ -239,7 +239,23 @@ def check_brackets():  # brav
     Instanz_PopUp = PopUp()
     i = 0
     Fehlerzeilennummer = []
+    # _cut_Satznummern_liste = []
+    
+    # for r in Satznummern_liste:
+    #         print(r)
+    #         cut_Satznummern_liste = r.split(";")[0]
+    #         _cut_Satznummern_liste.append(cut_Satznummern_liste)
+
+
+    # print(_cut_Satznummern_liste)
+    
+    
+    
+
+    
     for s in Satznummern_liste:
+        
+       
         x = re.findall("\(", Satznummern_liste[i])
         y = re.findall("\)", Satznummern_liste[i])
         
