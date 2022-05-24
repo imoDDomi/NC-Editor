@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>1131</width>
+    <height>789</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -91,6 +91,16 @@
          <string>Einstellungen was geprüft werden soll</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="cb_ids">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 0);</string>
+           </property>
+           <property name="text">
+            <string>IDS Nummern</string>
+           </property>
+          </widget>
+         </item>
          <item row="1" column="1">
           <widget class="QLabel" name="lb_schrittweite">
            <property name="styleSheet">
@@ -98,32 +108,6 @@
            </property>
            <property name="text">
             <string>Schrittweite</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="lb_startnummer">
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 0);</string>
-           </property>
-           <property name="text">
-            <string>Startnummer</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QSpinBox" name="sb_schrittweite">
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 0);</string>
-           </property>
-           <property name="minimum">
-            <number>0</number>
-           </property>
-           <property name="maximum">
-            <number>1000</number>
-           </property>
-           <property name="value">
-            <number>10</number>
            </property>
           </widget>
          </item>
@@ -183,16 +167,6 @@ border-color: rgb(200, 200, 0);
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
-          <widget class="QCheckBox" name="cb_ids">
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 0);</string>
-           </property>
-           <property name="text">
-            <string>IDS Nummern</string>
-           </property>
-          </widget>
-         </item>
          <item row="4" column="0" colspan="5">
           <widget class="QTextBrowser" name="textBrowser">
            <property name="font">
@@ -237,7 +211,46 @@ hr { height: 1px; border-width: 0; }
            </property>
           </spacer>
          </item>
-         <item row="2" column="3" colspan="2">
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="cb_klammern">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 0);</string>
+           </property>
+           <property name="text">
+            <string>Klammern</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="lb_startnummer">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 0);</string>
+           </property>
+           <property name="text">
+            <string>Startnummer</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QSpinBox" name="sb_schrittweite">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(0, 0, 0);</string>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>1000</number>
+           </property>
+           <property name="value">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -250,16 +263,10 @@ hr { height: 1px; border-width: 0; }
            </property>
           </spacer>
          </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="cb_klammern">
-           <property name="styleSheet">
-            <string notr="true">color: rgb(0, 0, 0);</string>
-           </property>
+         <item row="2" column="4">
+          <widget class="QLabel" name="lb_version">
            <property name="text">
-            <string>Klammern</string>
-           </property>
-           <property name="checked">
-            <bool>true</bool>
+            <string>v1.0 Dominik Polo</string>
            </property>
           </widget>
          </item>

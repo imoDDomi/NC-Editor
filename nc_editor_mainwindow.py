@@ -24,7 +24,7 @@ class Ui_Hauptfenster(object):
     def setupUi(self, Hauptfenster):
         if not Hauptfenster.objectName():
             Hauptfenster.setObjectName(u"Hauptfenster")
-        Hauptfenster.resize(1000, 700)
+        Hauptfenster.resize(1131, 789)
         icon = QIcon()
         icon.addFile(u"icons/lvt.png", QSize(), QIcon.Normal, QIcon.Off)
         Hauptfenster.setWindowIcon(icon)
@@ -71,26 +71,17 @@ class Ui_Hauptfenster(object):
         self.groupBox.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.gridLayout_2 = QGridLayout(self.groupBox)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.cb_ids = QCheckBox(self.groupBox)
+        self.cb_ids.setObjectName(u"cb_ids")
+        self.cb_ids.setStyleSheet(u"color: rgb(0, 0, 0);")
+
+        self.gridLayout_2.addWidget(self.cb_ids, 2, 0, 1, 1)
+
         self.lb_schrittweite = QLabel(self.groupBox)
         self.lb_schrittweite.setObjectName(u"lb_schrittweite")
         self.lb_schrittweite.setStyleSheet(u"color: rgb(0, 0, 0);")
 
         self.gridLayout_2.addWidget(self.lb_schrittweite, 1, 1, 1, 1)
-
-        self.lb_startnummer = QLabel(self.groupBox)
-        self.lb_startnummer.setObjectName(u"lb_startnummer")
-        self.lb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
-
-        self.gridLayout_2.addWidget(self.lb_startnummer, 0, 1, 1, 1)
-
-        self.sb_schrittweite = QSpinBox(self.groupBox)
-        self.sb_schrittweite.setObjectName(u"sb_schrittweite")
-        self.sb_schrittweite.setStyleSheet(u"color: rgb(0, 0, 0);")
-        self.sb_schrittweite.setMinimum(0)
-        self.sb_schrittweite.setMaximum(1000)
-        self.sb_schrittweite.setValue(10)
-
-        self.gridLayout_2.addWidget(self.sb_schrittweite, 1, 2, 1, 1)
 
         self.cb_satznummern = QCheckBox(self.groupBox)
         self.cb_satznummern.setObjectName(u"cb_satznummern")
@@ -131,12 +122,6 @@ class Ui_Hauptfenster(object):
 
         self.gridLayout_2.addWidget(self.sb_startnummer, 0, 2, 1, 1)
 
-        self.cb_ids = QCheckBox(self.groupBox)
-        self.cb_ids.setObjectName(u"cb_ids")
-        self.cb_ids.setStyleSheet(u"color: rgb(0, 0, 0);")
-
-        self.gridLayout_2.addWidget(self.cb_ids, 2, 0, 1, 1)
-
         self.textBrowser = QTextBrowser(self.groupBox)
         self.textBrowser.setObjectName(u"textBrowser")
         font = QFont()
@@ -154,16 +139,36 @@ class Ui_Hauptfenster(object):
 
         self.gridLayout_2.addItem(self.horizontalSpacer, 1, 3, 1, 1)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer_3, 2, 3, 1, 2)
-
         self.cb_klammern = QCheckBox(self.groupBox)
         self.cb_klammern.setObjectName(u"cb_klammern")
         self.cb_klammern.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.cb_klammern.setChecked(True)
 
         self.gridLayout_2.addWidget(self.cb_klammern, 1, 0, 1, 1)
+
+        self.lb_startnummer = QLabel(self.groupBox)
+        self.lb_startnummer.setObjectName(u"lb_startnummer")
+        self.lb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
+
+        self.gridLayout_2.addWidget(self.lb_startnummer, 0, 1, 1, 1)
+
+        self.sb_schrittweite = QSpinBox(self.groupBox)
+        self.sb_schrittweite.setObjectName(u"sb_schrittweite")
+        self.sb_schrittweite.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.sb_schrittweite.setMinimum(0)
+        self.sb_schrittweite.setMaximum(1000)
+        self.sb_schrittweite.setValue(10)
+
+        self.gridLayout_2.addWidget(self.sb_schrittweite, 1, 2, 1, 1)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer_3, 2, 3, 1, 1)
+
+        self.lb_version = QLabel(self.groupBox)
+        self.lb_version.setObjectName(u"lb_version")
+
+        self.gridLayout_2.addWidget(self.lb_version, 2, 4, 1, 1)
 
 
         self.gridLayout.addWidget(self.groupBox, 3, 0, 1, 5)
@@ -222,11 +227,10 @@ class Ui_Hauptfenster(object):
         self.pb_save_as.setText(QCoreApplication.translate("Hauptfenster", u"Speichern unter", None))
         self.rb_file.setText(QCoreApplication.translate("Hauptfenster", u"Datei ausw\u00e4hlen", None))
         self.groupBox.setTitle(QCoreApplication.translate("Hauptfenster", u"Einstellungen was gepr\u00fcft werden soll", None))
+        self.cb_ids.setText(QCoreApplication.translate("Hauptfenster", u"IDS Nummern", None))
         self.lb_schrittweite.setText(QCoreApplication.translate("Hauptfenster", u"Schrittweite", None))
-        self.lb_startnummer.setText(QCoreApplication.translate("Hauptfenster", u"Startnummer", None))
         self.cb_satznummern.setText(QCoreApplication.translate("Hauptfenster", u"Satznummern", None))
         self.pb_check_program.setText(QCoreApplication.translate("Hauptfenster", u"Check NC-Programm", None))
-        self.cb_ids.setText(QCoreApplication.translate("Hauptfenster", u"IDS Nummern", None))
         self.textBrowser.setHtml(QCoreApplication.translate("Hauptfenster", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -235,6 +239,8 @@ class Ui_Hauptfenster(object):
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Segoe UI'; font-size:9pt; font-weight:400;\"><br /></p></body></html>", None))
         self.textBrowser.setPlaceholderText(QCoreApplication.translate("Hauptfenster", u"Datei Vorschau", None))
         self.cb_klammern.setText(QCoreApplication.translate("Hauptfenster", u"Klammern", None))
+        self.lb_startnummer.setText(QCoreApplication.translate("Hauptfenster", u"Startnummer", None))
+        self.lb_version.setText(QCoreApplication.translate("Hauptfenster", u"v1.0 Dominik Polo", None))
         self.le_input.setText("")
         self.le_input.setPlaceholderText(QCoreApplication.translate("Hauptfenster", u"NC Programm Pfad", None))
         self.lb_saved.setText("")
