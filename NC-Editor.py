@@ -26,7 +26,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
 
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
-
+        self.lb_version.setText("v1.1 Dominik Polo")
+        
         
             
 
@@ -143,19 +144,24 @@ def correct_lines_in_dir():
      
     
     window.progressBar.setHidden(False)
+    # window.progressBar.setValue(50)
+    # window.progressBar.setRange(1, len(files_Satznummern_liste))
+    # window.progressBar.setMinimum(0)
+    # window.progressBar.setMaximum(100)
 
-    # window.progressBar.setRange("minimum, maximum")
-    # window.progressBar.valueChanged("value")
+    # 
 
 
     line_offset = 0
     x = []
     Liste_fertig = []
     l = 0
-
+    g = 0
     
 
     for i in files_Satznummern_liste:
+        
+        
         current_file_name = i
     
         with open(directory_path + current_file_name, "r") as q:    
@@ -177,6 +183,13 @@ def correct_lines_in_dir():
         with open(directory_path + current_file_name, 'w') as save_new_text:
             for item in s:
                 save_new_text.write("%s" % item)
+        g+=1
+        
+        window.progressBar.setValue(g/len(files_Satznummern_liste)*100)
+        
+        if window.progressBar.value() == 100:
+            window.progressBar.setHidden(True)
+            
 
     window.lb_saved.setHidden(False)
     window.lb_saved_text.setHidden(False)
