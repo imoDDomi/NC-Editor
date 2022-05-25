@@ -3,7 +3,8 @@ import sys, re, time, os, fnmatch, itertools
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QDialog
 from nc_editor_mainwindow import Ui_Hauptfenster
 from PopUpBracketCheck import Ui_PopUpBracketCheck
-
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import Qt
 
 #in exe umwandeln:
 #auto-py-to-exe
@@ -25,6 +26,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
 
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
+
+        
             
 
     
@@ -200,9 +203,19 @@ def check_brackets_in_dir():
             lokal_Satznummern_liste = q.readlines()
         
         i = 0
-        for s in lokal_Satznummern_liste:
-            x = re.findall("\(", lokal_Satznummern_liste[i])
-            y = re.findall("\)", lokal_Satznummern_liste[i])
+
+
+        cut_lokal_Satznummern_liste = []
+
+        for r in lokal_Satznummern_liste:
+            
+            cut_lokal_Satznummern = r.split(";")[0]
+            cut_lokal_Satznummern_liste.append(cut_lokal_Satznummern)
+
+        
+        for s in cut_lokal_Satznummern_liste:
+            x = re.findall("\(", cut_lokal_Satznummern_liste[i])
+            y = re.findall("\)", cut_lokal_Satznummern_liste[i])
             
             if not len(x) == len(y):
                 Fehlerzeilennummer.append("Fehler in " + current_file_name + " in Zeile: "+str(i+1)+"\n")
@@ -254,25 +267,20 @@ def check_brackets():  # brav
     Instanz_PopUp = PopUp()
     i = 0
     Fehlerzeilennummer = []
-    # _cut_Satznummern_liste = []
+    cut_Satznummern_liste_without_line_comments_list = []
     
-    # for r in Satznummern_liste:
-    #         print(r)
-    #         cut_Satznummern_liste = r.split(";")[0]
-    #         _cut_Satznummern_liste.append(cut_Satznummern_liste)
-
-
-    # print(_cut_Satznummern_liste)
+    for r in Satznummern_liste:
+            
+        cut_Satznummern_liste_without_line_comments = r.split(";")[0]
+        cut_Satznummern_liste_without_line_comments_list.append(cut_Satznummern_liste_without_line_comments)
+        
     
-    
-    
-
-    
-    for s in Satznummern_liste:
+        
+    for s in cut_Satznummern_liste_without_line_comments_list:
         
        
-        x = re.findall("\(", Satznummern_liste[i])
-        y = re.findall("\)", Satznummern_liste[i])
+        x = re.findall("\(", cut_Satznummern_liste_without_line_comments_list[i])
+        y = re.findall("\)", cut_Satznummern_liste_without_line_comments_list[i])
         
         if not len(x) == len(y):
             Fehlerzeilennummer.append("Fehler in Zeile: "+str(i+1)+"\n")
@@ -326,7 +334,7 @@ def save_as_file(): # close and save file
     global Satznummern_liste
     global Satznummern_string
     save_file_instance = QFileDialog.getSaveFileName(None, "NC Programme speichern unter", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
-    with open(save_file_instance[0], 'w') as save_new_text:
+    with open(save_file_instance[0], 'w', encoding="utf-8") as save_new_text:
         save_new_text.write(Satznummern_string)
         window.lb_saved.setHidden(False)    
 
@@ -336,7 +344,7 @@ def save_file():
 
 
     plain_text_content = window.textbrowser.toPlainText()
-    with open(Path_single_file, 'w') as save_new_text_2:
+    with open(Path_single_file, 'w', encoding="utf-8") as save_new_text_2:
         
         save_new_text_2.write(plain_text_content)
         window.lb_saved.setHidden(False)
@@ -346,24 +354,19 @@ def save_file():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-#Bereich immer gleich lassen, dient zum aufrufen der Applikation
+def main():
+    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(
+        Qt.HighDpiScaleFactorRoundingPolicy.Round
+    )
 
 app = QApplication([])
 window = MainWindow()
 window.show()
 sys.exit(app.exec())
-#Bereich Ende
+
+
+if __name__ == "__main__":
+    main()
 
 
 
