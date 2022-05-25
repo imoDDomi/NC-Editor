@@ -17,8 +17,10 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
         self.setupUi(self) 
         self.pb_quelle.clicked.connect(open_file)
         self.pb_check_program.clicked.connect(check_config)
-        self.pb_save_as.clicked.connect(save_file)
+        self.pb_save_as.clicked.connect(save_as_file)
+        self.pb_save.clicked.connect(save_file)
         self.lb_saved.setHidden(True) # Button saved ausblenden weil Domi zu blöd zum einstellen im Designer ist
+        self.lb_saved_text.setHidden(True)
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
             
@@ -67,19 +69,21 @@ def open_file(): # open file
     global Satznummern_liste
     global Satznummern_string
     global files_Satznummern_liste
+    global Path_single_file
     window.lb_saved.setHidden(True)
-    
+    window.lb_saved_text.setHidden(True)
 
     if window.rb_file.isChecked():
 
         
         fname = QFileDialog.getOpenFileName(None, "NC Programme auswählen", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.DEF)")
         window.le_input.setText(fname[0])
+        Path_single_file = fname[0]
         
         
         with open(fname[0], "r") as rf:
             Satznummern_string = rf.read()
-            window.textBrowser.setText(Satznummern_string)
+            window.textbrowser.setPlainText(Satznummern_string)
             
         
         with open(fname[0], "r") as rf_2:    
@@ -123,7 +127,7 @@ def loop_directories(path):
         
         zeilenumbruch = "\n"
         w = zeilenumbruch.join(files_Satznummern_liste)
-        window.textBrowser.setText(w)
+        window.textbrowser.setPlainText(w)
 
 
 
@@ -166,6 +170,7 @@ def correct_lines_in_dir():
                 save_new_text.write("%s" % item)
 
     window.lb_saved.setHidden(False)
+    window.lb_saved_text.setHidden(False)
 
 
 
@@ -216,6 +221,7 @@ def correct_lines():
     global Satznummern_liste
     global Satznummern_string
     window.lb_saved.setHidden(True)
+    window.lb_saved_text.setHidden(True)
     line_offset = 0
     i = 0
     x = []
@@ -230,12 +236,15 @@ def correct_lines():
         i += 1
     Satznummern_liste = Liste_fertig
     Satznummern_string = ''.join(Liste_fertig) 
-    window.textBrowser.setText(Satznummern_string)
+    window.textbrowser.setPlainText(Satznummern_string)
     
 def check_brackets():  # brav
     global Satznummern_liste
     global Satznummern_string
     
+    window.lb_saved.setHidden(True)
+    window.lb_saved_text.setHidden(True)
+
     Instanz_PopUp = PopUp()
     i = 0
     Fehlerzeilennummer = []
@@ -281,7 +290,10 @@ def check_brackets():  # brav
 def check_IDS():
     global Satznummern_liste
     global Satznummern_string
+    
     window.lb_saved.setHidden(True)
+    window.lb_saved_text.setHidden(True)
+
     line_offset = 0
     i = 0
     x = []
@@ -299,19 +311,42 @@ def check_IDS():
         
     Satznummern_liste = Liste_fertig
     Satznummern_string = ''.join(Liste_fertig) 
-    window.textBrowser.setText(Satznummern_string)
+    window.textbrowser.setPlainText(Satznummern_string)
     
               
 
                
-def save_file(): # close and save file
+def save_as_file(): # close and save file
     global Satznummern_liste
     global Satznummern_string
     save_file_instance = QFileDialog.getSaveFileName(None, "NC Programme speichern unter", "C:/Users/domin/Desktop/NC Programme" , "NC Programme (*.SPF *.MPF *.SAFE *.DEF)")
     with open(save_file_instance[0], 'w') as save_new_text:
-        for item in Satznummern_string:
-            save_new_text.write("%s" % item)
+        save_new_text.write(Satznummern_string)
         window.lb_saved.setHidden(False)    
+
+def save_file():
+    global Satznummern_liste
+    global Satznummern_string
+
+
+    plain_text_content = window.textbrowser.toPlainText()
+    with open(Path_single_file, 'w') as save_new_text_2:
+        
+        save_new_text_2.write(plain_text_content)
+        window.lb_saved.setHidden(False)
+        window.lb_saved_text.setHidden(False)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
