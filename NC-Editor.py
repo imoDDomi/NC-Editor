@@ -21,6 +21,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
         self.pb_save.clicked.connect(save_file)
         self.lb_saved.setHidden(True) # Button saved ausblenden weil Domi zu blöd zum einstellen im Designer ist
         self.lb_saved_text.setHidden(True)
+        self.progressBar.setHidden(True)
+
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
             
@@ -137,6 +139,10 @@ def correct_lines_in_dir():
     global files_Satznummern_liste
      
     
+    window.progressBar.setHidden(False)
+
+    # window.progressBar.setRange("minimum, maximum")
+    # window.progressBar.valueChanged("value")
 
 
     line_offset = 0
