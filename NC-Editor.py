@@ -26,7 +26,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
 
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
-        self.lb_version.setText("v1.1 Dominik Polo")
+        self.lb_version.setText("v1.2 Dominik Polo")
         
         
             
