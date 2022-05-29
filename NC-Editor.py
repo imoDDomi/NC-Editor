@@ -27,7 +27,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
         self.lb_version.setText("v1.2 Dominik Polo")
-        
+        self.pb_reset_file.clicked.connect(reset_file)
         
             
 
@@ -70,6 +70,11 @@ def check_config():
             check_brackets_in_dir()
 
 
+def reset_file():
+    
+    
+    
+    pass
 
 def open_file(): # open file
     global Satznummern_liste
