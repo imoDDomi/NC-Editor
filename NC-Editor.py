@@ -186,7 +186,7 @@ def correct_lines_in_dir():
             for item in s:
                 save_new_text.write("%s" % item)
         g+=1
-        time.sleep(0.5)
+        #time.sleep(0.5)
         
         window.progressBar.setValue(g/len(files_Satznummern_liste)*100)
         
