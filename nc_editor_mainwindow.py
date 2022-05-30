@@ -15,16 +15,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QGridLayout, QGroupBox,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
+from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QGridLayout,
+    QGroupBox, QLabel, QLineEdit, QMainWindow,
+    QPlainTextEdit, QProgressBar, QPushButton, QRadioButton,
     QSizePolicy, QSpacerItem, QSpinBox, QStatusBar,
-    QTextBrowser, QVBoxLayout, QWidget)
+    QVBoxLayout, QWidget)
 
 class Ui_Hauptfenster(object):
     def setupUi(self, Hauptfenster):
         if not Hauptfenster.objectName():
             Hauptfenster.setObjectName(u"Hauptfenster")
-        Hauptfenster.resize(1000, 700)
+        Hauptfenster.resize(831, 735)
         icon = QIcon()
         icon.addFile(u"icons/lvt.png", QSize(), QIcon.Normal, QIcon.Off)
         Hauptfenster.setWindowIcon(icon)
@@ -35,6 +36,12 @@ class Ui_Hauptfenster(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
+        self.rb_file = QRadioButton(self.centralwidget)
+        self.rb_file.setObjectName(u"rb_file")
+        self.rb_file.setChecked(True)
+
+        self.gridLayout.addWidget(self.rb_file, 0, 2, 1, 1)
+
         self.le_input = QLineEdit(self.centralwidget)
         self.le_input.setObjectName(u"le_input")
         self.le_input.setEnabled(True)
@@ -49,26 +56,7 @@ class Ui_Hauptfenster(object):
         self.le_input.setStyleSheet(u"")
         self.le_input.setReadOnly(True)
 
-        self.gridLayout.addWidget(self.le_input, 0, 0, 1, 2)
-
-        self.pb_quelle = QPushButton(self.centralwidget)
-        self.pb_quelle.setObjectName(u"pb_quelle")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
-        sizePolicy1.setHorizontalStretch(0)
-        sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.pb_quelle.sizePolicy().hasHeightForWidth())
-        self.pb_quelle.setSizePolicy(sizePolicy1)
-        self.pb_quelle.setMinimumSize(QSize(100, 0))
-        self.pb_quelle.setMaximumSize(QSize(100, 50))
-        self.pb_quelle.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.pb_quelle, 0, 2, 1, 1)
-
-        self.pb_save_as = QPushButton(self.centralwidget)
-        self.pb_save_as.setObjectName(u"pb_save_as")
-        self.pb_save_as.setStyleSheet(u"")
-
-        self.gridLayout.addWidget(self.pb_save_as, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.le_input, 0, 0, 1, 1)
 
         self.groupBox = QGroupBox(self.centralwidget)
         self.groupBox.setObjectName(u"groupBox")
@@ -76,17 +64,38 @@ class Ui_Hauptfenster(object):
         self.groupBox.setStyleSheet(u"color: rgb(0, 0, 0);")
         self.gridLayout_2 = QGridLayout(self.groupBox)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.lb_schrittweite = QLabel(self.groupBox)
-        self.lb_schrittweite.setObjectName(u"lb_schrittweite")
-        self.lb_schrittweite.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_2.addWidget(self.lb_schrittweite, 1, 1, 1, 1)
+        self.gridLayout_2.addItem(self.horizontalSpacer_4, 0, 4, 1, 4)
 
-        self.lb_startnummer = QLabel(self.groupBox)
-        self.lb_startnummer.setObjectName(u"lb_startnummer")
-        self.lb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.sb_startnummer = QSpinBox(self.groupBox)
+        self.sb_startnummer.setObjectName(u"sb_startnummer")
+        self.sb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.sb_startnummer.setMaximum(10000)
+        self.sb_startnummer.setSingleStep(100)
+        self.sb_startnummer.setValue(1000)
 
-        self.gridLayout_2.addWidget(self.lb_startnummer, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.sb_startnummer, 0, 2, 1, 1)
+
+        self.lb_version = QLabel(self.groupBox)
+        self.lb_version.setObjectName(u"lb_version")
+        self.lb_version.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_2.addWidget(self.lb_version, 3, 9, 1, 1)
+
+        self.lb_saved = QLabel(self.groupBox)
+        self.lb_saved.setObjectName(u"lb_saved")
+        self.lb_saved.setEnabled(True)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.lb_saved.sizePolicy().hasHeightForWidth())
+        self.lb_saved.setSizePolicy(sizePolicy1)
+        self.lb_saved.setMaximumSize(QSize(24, 24))
+        self.lb_saved.setPixmap(QPixmap(u"icons/uberpruft.png"))
+        self.lb_saved.setScaledContents(True)
+
+        self.gridLayout_2.addWidget(self.lb_saved, 1, 9, 1, 1)
 
         self.sb_schrittweite = QSpinBox(self.groupBox)
         self.sb_schrittweite.setObjectName(u"sb_schrittweite")
@@ -97,12 +106,31 @@ class Ui_Hauptfenster(object):
 
         self.gridLayout_2.addWidget(self.sb_schrittweite, 1, 2, 1, 1)
 
+        self.cb_klammern = QCheckBox(self.groupBox)
+        self.cb_klammern.setObjectName(u"cb_klammern")
+        self.cb_klammern.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.cb_klammern.setChecked(True)
+
+        self.gridLayout_2.addWidget(self.cb_klammern, 1, 0, 1, 1)
+
+        self.pb_save_as = QPushButton(self.groupBox)
+        self.pb_save_as.setObjectName(u"pb_save_as")
+        self.pb_save_as.setStyleSheet(u"")
+
+        self.gridLayout_2.addWidget(self.pb_save_as, 0, 9, 1, 1)
+
         self.cb_satznummern = QCheckBox(self.groupBox)
         self.cb_satznummern.setObjectName(u"cb_satznummern")
         self.cb_satznummern.setStyleSheet(u"color: rgb(0, 0, 0);")
-        self.cb_satznummern.setChecked(False)
+        self.cb_satznummern.setChecked(True)
 
         self.gridLayout_2.addWidget(self.cb_satznummern, 0, 0, 1, 1)
+
+        self.lb_saved_text = QLabel(self.groupBox)
+        self.lb_saved_text.setObjectName(u"lb_saved_text")
+        self.lb_saved_text.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.gridLayout_2.addWidget(self.lb_saved_text, 1, 8, 1, 1)
 
         self.pb_check_program = QPushButton(self.groupBox)
         self.pb_check_program.setObjectName(u"pb_check_program")
@@ -125,70 +153,114 @@ class Ui_Hauptfenster(object):
 "\n"
 "")
 
-        self.gridLayout_2.addWidget(self.pb_check_program, 2, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.pb_check_program, 3, 2, 1, 1)
 
-        self.sb_startnummer = QSpinBox(self.groupBox)
-        self.sb_startnummer.setObjectName(u"sb_startnummer")
-        self.sb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
-        self.sb_startnummer.setMaximum(10000)
-        self.sb_startnummer.setSingleStep(100)
-        self.sb_startnummer.setValue(1000)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.gridLayout_2.addWidget(self.sb_startnummer, 0, 2, 1, 1)
+        self.gridLayout_2.addItem(self.horizontalSpacer, 1, 4, 1, 4)
+
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_2.addItem(self.horizontalSpacer_3, 3, 4, 1, 5)
+
+        self.lb_schrittweite = QLabel(self.groupBox)
+        self.lb_schrittweite.setObjectName(u"lb_schrittweite")
+        self.lb_schrittweite.setStyleSheet(u"color: rgb(0, 0, 0);")
+
+        self.gridLayout_2.addWidget(self.lb_schrittweite, 1, 1, 1, 1)
 
         self.cb_ids = QCheckBox(self.groupBox)
         self.cb_ids.setObjectName(u"cb_ids")
         self.cb_ids.setStyleSheet(u"color: rgb(0, 0, 0);")
 
-        self.gridLayout_2.addWidget(self.cb_ids, 2, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.cb_ids, 3, 0, 1, 1)
 
-        self.textBrowser = QTextBrowser(self.groupBox)
-        self.textBrowser.setObjectName(u"textBrowser")
+        self.lb_startnummer = QLabel(self.groupBox)
+        self.lb_startnummer.setObjectName(u"lb_startnummer")
+        self.lb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
+
+        self.gridLayout_2.addWidget(self.lb_startnummer, 0, 1, 1, 1)
+
+        self.pb_save = QPushButton(self.groupBox)
+        self.pb_save.setObjectName(u"pb_save")
+
+        self.gridLayout_2.addWidget(self.pb_save, 0, 8, 1, 1)
+
+        self.textbrowser = QPlainTextEdit(self.groupBox)
+        self.textbrowser.setObjectName(u"textbrowser")
+        palette = QPalette()
+        brush = QBrush(QColor(0, 0, 0, 255))
+        brush.setStyle(Qt.SolidPattern)
+        palette.setBrush(QPalette.Active, QPalette.WindowText, brush)
+        palette.setBrush(QPalette.Active, QPalette.Text, brush)
+        palette.setBrush(QPalette.Active, QPalette.ButtonText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+#endif
+        palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.Text, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+#endif
+        palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.Text, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+#endif
+        self.textbrowser.setPalette(palette)
         font = QFont()
-        font.setFamilies([u"Courier New"])
         font.setPointSize(10)
-        font.setBold(True)
-        self.textBrowser.setFont(font)
-        self.textBrowser.setStyleSheet(u"")
-        self.textBrowser.setReadOnly(True)
-        self.textBrowser.setOverwriteMode(False)
+        self.textbrowser.setFont(font)
+        self.textbrowser.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
+        self.textbrowser.setFrameShape(QFrame.NoFrame)
+        self.textbrowser.setFrameShadow(QFrame.Plain)
 
-        self.gridLayout_2.addWidget(self.textBrowser, 4, 0, 1, 5)
-
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer, 1, 3, 1, 1)
-
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_2.addItem(self.horizontalSpacer_3, 2, 3, 1, 2)
-
-        self.cb_klammern = QCheckBox(self.groupBox)
-        self.cb_klammern.setObjectName(u"cb_klammern")
-        self.cb_klammern.setStyleSheet(u"color: rgb(0, 0, 0);")
-
-        self.gridLayout_2.addWidget(self.cb_klammern, 1, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.textbrowser, 4, 0, 1, 10)
 
 
-        self.gridLayout.addWidget(self.groupBox, 3, 0, 1, 3)
+        self.gridLayout.addWidget(self.groupBox, 6, 0, 1, 6)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.rb_directory = QRadioButton(self.centralwidget)
+        self.rb_directory.setObjectName(u"rb_directory")
 
-        self.gridLayout.addItem(self.horizontalSpacer_2, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.rb_directory, 4, 2, 1, 1)
 
-        self.lb_saved = QLabel(self.centralwidget)
-        self.lb_saved.setObjectName(u"lb_saved")
-        self.lb_saved.setEnabled(True)
-        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        self.progressBar = QProgressBar(self.centralwidget)
+        self.progressBar.setObjectName(u"progressBar")
+        self.progressBar.setEnabled(False)
+        self.progressBar.setMaximumSize(QSize(16777215, 20))
+        self.progressBar.setValue(24)
+
+        self.gridLayout.addWidget(self.progressBar, 4, 0, 1, 2)
+
+        self.pb_quelle = QPushButton(self.centralwidget)
+        self.pb_quelle.setObjectName(u"pb_quelle")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.lb_saved.sizePolicy().hasHeightForWidth())
-        self.lb_saved.setSizePolicy(sizePolicy2)
-        self.lb_saved.setMaximumSize(QSize(24, 24))
-        self.lb_saved.setPixmap(QPixmap(u"icons/uberpruft.png"))
-        self.lb_saved.setScaledContents(True)
+        sizePolicy2.setHeightForWidth(self.pb_quelle.sizePolicy().hasHeightForWidth())
+        self.pb_quelle.setSizePolicy(sizePolicy2)
+        self.pb_quelle.setMinimumSize(QSize(100, 0))
+        self.pb_quelle.setMaximumSize(QSize(100, 50))
+        self.pb_quelle.setStyleSheet(u"")
 
-        self.gridLayout.addWidget(self.lb_saved, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.pb_quelle, 0, 5, 1, 1)
+
+        self.pb_reset_file = QPushButton(self.centralwidget)
+        self.pb_reset_file.setObjectName(u"pb_reset_file")
+        sizePolicy2.setHeightForWidth(self.pb_reset_file.sizePolicy().hasHeightForWidth())
+        self.pb_reset_file.setSizePolicy(sizePolicy2)
+        self.pb_reset_file.setMaximumSize(QSize(20, 20))
+        self.pb_reset_file.setLayoutDirection(Qt.LeftToRight)
+        self.pb_reset_file.setAutoFillBackground(False)
+        icon1 = QIcon()
+        icon1.addFile(u"icons/reset.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.pb_reset_file.setIcon(icon1)
+        self.pb_reset_file.setIconSize(QSize(32, 16))
+
+        self.gridLayout.addWidget(self.pb_reset_file, 0, 4, 1, 1)
 
 
         self.verticalLayout.addLayout(self.gridLayout)
@@ -205,24 +277,23 @@ class Ui_Hauptfenster(object):
 
     def retranslateUi(self, Hauptfenster):
         Hauptfenster.setWindowTitle(QCoreApplication.translate("Hauptfenster", u"NC-Checker", None))
+        self.rb_file.setText(QCoreApplication.translate("Hauptfenster", u"Datei ausw\u00e4hlen", None))
         self.le_input.setText("")
         self.le_input.setPlaceholderText(QCoreApplication.translate("Hauptfenster", u"NC Programm Pfad", None))
-        self.pb_quelle.setText(QCoreApplication.translate("Hauptfenster", u"Quelle", None))
-        self.pb_save_as.setText(QCoreApplication.translate("Hauptfenster", u"Speichern unter", None))
-        self.groupBox.setTitle(QCoreApplication.translate("Hauptfenster", u"Einstellungen was gepr\u00fcft werden soll", None))
-        self.lb_schrittweite.setText(QCoreApplication.translate("Hauptfenster", u"Schrittweite", None))
-        self.lb_startnummer.setText(QCoreApplication.translate("Hauptfenster", u"Startnummer", None))
-        self.cb_satznummern.setText(QCoreApplication.translate("Hauptfenster", u"Satznummern", None))
-        self.pb_check_program.setText(QCoreApplication.translate("Hauptfenster", u"Check NC-Programm", None))
-        self.cb_ids.setText(QCoreApplication.translate("Hauptfenster", u"IDS Nummern", None))
-        self.textBrowser.setHtml(QCoreApplication.translate("Hauptfenster", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"</style></head><body style=\" font-family:'Courier New'; font-size:10pt; font-weight:700; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Segoe UI'; font-size:9pt; font-weight:400;\"><br /></p></body></html>", None))
-        self.textBrowser.setPlaceholderText(QCoreApplication.translate("Hauptfenster", u"Datei Vorschau", None))
-        self.cb_klammern.setText(QCoreApplication.translate("Hauptfenster", u"Klammern", None))
+        self.groupBox.setTitle(QCoreApplication.translate("Hauptfenster", u"Setup", None))
+        self.lb_version.setText(QCoreApplication.translate("Hauptfenster", u"Version", None))
         self.lb_saved.setText("")
+        self.cb_klammern.setText(QCoreApplication.translate("Hauptfenster", u"Klammern", None))
+        self.pb_save_as.setText(QCoreApplication.translate("Hauptfenster", u"Speichern unter", None))
+        self.cb_satznummern.setText(QCoreApplication.translate("Hauptfenster", u"Satznummern", None))
+        self.lb_saved_text.setText(QCoreApplication.translate("Hauptfenster", u"gespeichert!", None))
+        self.pb_check_program.setText(QCoreApplication.translate("Hauptfenster", u"Check NC-Programm", None))
+        self.lb_schrittweite.setText(QCoreApplication.translate("Hauptfenster", u"Schrittweite", None))
+        self.cb_ids.setText(QCoreApplication.translate("Hauptfenster", u"IDS Nummern", None))
+        self.lb_startnummer.setText(QCoreApplication.translate("Hauptfenster", u"Startnummer", None))
+        self.pb_save.setText(QCoreApplication.translate("Hauptfenster", u"Speichern", None))
+        self.textbrowser.setPlaceholderText("")
+        self.rb_directory.setText(QCoreApplication.translate("Hauptfenster", u"Ordner ausw\u00e4hlen", None))
+        self.pb_quelle.setText(QCoreApplication.translate("Hauptfenster", u"Quelle", None))
     # retranslateUi
 
