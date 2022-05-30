@@ -26,7 +26,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster): # hier werden Pushbuttons usw. p
 
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
-        self.lb_version.setText("v1.2 Dominik Polo")
+        self.lb_version.setText("v1.3 Dominik Polo")
         self.pb_reset_file.clicked.connect(reset_file)
         
             
@@ -71,10 +71,12 @@ def check_config():
 
 
 def reset_file():
+
+
+    with open(Path_single_file, "r") as rf:
+            Satznummern_string = rf.read()
+            window.textbrowser.setPlainText(Satznummern_string)
     
-    
-    
-    pass
 
 def open_file(): # open file
     global Satznummern_liste
@@ -149,12 +151,7 @@ def correct_lines_in_dir():
      
     
     window.progressBar.setHidden(False)
-    # window.progressBar.setValue(50)
-    # window.progressBar.setRange(1, len(files_Satznummern_liste))
-    # window.progressBar.setMinimum(0)
-    # window.progressBar.setMaximum(100)
-
-    # 
+    
 
 
     line_offset = 0
@@ -189,6 +186,7 @@ def correct_lines_in_dir():
             for item in s:
                 save_new_text.write("%s" % item)
         g+=1
+        time.sleep(0.5)
         
         window.progressBar.setValue(g/len(files_Satznummern_liste)*100)
         
