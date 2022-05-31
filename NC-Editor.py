@@ -6,7 +6,7 @@ import sys
 import time
 
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QGuiApplication
+from PySide6.QtGui import QFont, QFontDatabase, QGuiApplication
 
 # from os import* MERKE! niemals alles importieren, hat standard openfile mit os.openfile() überschrieben :(
 from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow
@@ -22,6 +22,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        QFontDatabase.addApplicationFont("fonts/JetBrainsMonoNL-Light.ttf")
+        self.textbrowser.setFont("JetBrains Mono NL Light")
         self.pb_quelle.clicked.connect(open_file)
         self.pb_check_program.clicked.connect(check_config)
         self.pb_save_as.clicked.connect(save_as_file)
@@ -34,6 +36,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         self.rb_file.clicked.connect(enable_IDS_checkbox)
         self.lb_version.setText("v1.3 Dominik Polo")
         self.pb_reset_file.clicked.connect(reset_file)
+
+        # self.QtGui.QFontDatabase.addApplicationFont("fonts/JetBrainsMonoNL-Light.ttf")
 
 
 class PopUp(QDialog, Ui_PopUpBracketCheck):
