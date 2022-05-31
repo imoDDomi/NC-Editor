@@ -1,3 +1,4 @@
+# --coding: utf-8 --
 import fnmatch
 import itertools
 import os
@@ -5,6 +6,7 @@ import re
 import sys
 import time
 
+from numpy import TooHardError
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont, QFontDatabase, QGuiApplication
 
@@ -22,8 +24,9 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        QFontDatabase.addApplicationFont("fonts/JetBrainsMonoNL-Light.ttf")
-        self.textbrowser.setFont("JetBrains Mono NL Light")
+        QFontDatabase.addApplicationFont("fonts/JetBrainsMonoNL-Bold.ttf")
+        self.le_input.setFont("JetBrains Mono NL Bold")
+        self.textbrowser.setFont(QFont("JetBrains Mono NL Bold", 12))
         self.pb_quelle.clicked.connect(open_file)
         self.pb_check_program.clicked.connect(check_config)
         self.pb_save_as.clicked.connect(save_as_file)
@@ -37,13 +40,12 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         self.lb_version.setText("v1.3 Dominik Polo")
         self.pb_reset_file.clicked.connect(reset_file)
 
-        # self.QtGui.QFontDatabase.addApplicationFont("fonts/JetBrainsMonoNL-Light.ttf")
-
 
 class PopUp(QDialog, Ui_PopUpBracketCheck):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.tb_popup.setFont("JetBrains Mono NL Light")
 
 
 # hier werden Funktionen definiert
@@ -104,7 +106,7 @@ def open_file():  # open file
         window.le_input.setText(fname[0])
         Path_single_file = fname[0]
 
-        with open(fname[0], "r") as rf:
+        with open(fname[0], "r", encoding="utf-8") as rf:
             Satznummern_string = rf.read()
             window.textbrowser.setPlainText(Satznummern_string)
 
@@ -364,3 +366,9 @@ sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
+
+
+ToDo
+
+
+# https://stackoverflow.com/questions/24287111/changing-a-single-strings-color-within-a-qtextedit

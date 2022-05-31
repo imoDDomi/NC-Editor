@@ -427,7 +427,7 @@ border-color: rgb(200, 200, 0);
            </property>
            <property name="font">
             <font>
-             <pointsize>10</pointsize>
+             <pointsize>15</pointsize>
             </font>
            </property>
            <property name="cursor" stdset="0">
