@@ -4,9 +4,7 @@ import itertools
 import os
 import re
 import sys
-import time
 
-from numpy import TooHardError
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont, QFontDatabase, QGuiApplication
 
@@ -24,9 +22,9 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        QFontDatabase.addApplicationFont("fonts/JetBrainsMonoNL-Bold.ttf")
-        self.le_input.setFont("JetBrains Mono NL Bold")
-        self.textbrowser.setFont(QFont("JetBrains Mono NL Bold", 12))
+        QFontDatabase.addApplicationFont("fonts/JetBrainsMono-Regular.ttf")
+        self.le_input.setFont("JetBrains Mono")
+        self.textbrowser.setFont(QFont("JetBrains Mono", 12))
         self.pb_quelle.clicked.connect(open_file)
         self.pb_check_program.clicked.connect(check_config)
         self.pb_save_as.clicked.connect(save_as_file)
