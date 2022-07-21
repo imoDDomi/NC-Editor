@@ -8,7 +8,7 @@ Auswahl ob Datei oder alle Dateien in einem Ordner bearbeitet werden sollen
 
 Mit dem Button "Quelle" kann eine Datei oder ein ganzer Ordner gewählt werden, je nach Auswahl
 
-
+"Reset" links neben "Quelle" setzt die Datei zurück
 
 Die aktuell geöffnete Datei/Ordner wird als Pfad angezeigt
 
