@@ -1,1 +1,1 @@
-pyside6-uic.exe nc_editor_mainwindow.ui -o nc_editor_mainwindow.py
+pyside6-uic.exe help.ui -o help.py

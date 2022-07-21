@@ -11,6 +11,7 @@ from PySide6.QtGui import QFont, QFontDatabase, QGuiApplication
 # from os import* MERKE! niemals alles importieren, hat standard openfile mit os.openfile() überschrieben :(
 from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow
 
+from help import Ui_Hilfe
 from nc_editor_mainwindow import Ui_Hauptfenster
 from PopUpBracketCheck import Ui_PopUpBracketCheck
 
@@ -29,6 +30,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         self.pb_check_program.clicked.connect(check_config)
         self.pb_save_as.clicked.connect(save_as_file)
         self.pb_save.clicked.connect(save_file)
+        self.mb_info.triggered.connect(open_help)
+        self.mb_version.triggered.connect(open_version)
         self.lb_saved.setHidden(True)  # Button saved ausblenden weil Domi zu blöd zum einstellen im Designer ist
         self.lb_saved_text.setHidden(True)
         self.progressBar.setHidden(True)
@@ -44,6 +47,13 @@ class PopUp(QDialog, Ui_PopUpBracketCheck):
         super().__init__()
         self.setupUi(self)
         self.tb_popup.setFont("JetBrains Mono NL Light")
+
+
+class Help(QDialog, Ui_Hilfe):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.helptext.setFont(QFont("JetBrains Mono", 10))
 
 
 # hier werden Funktionen definiert
@@ -350,6 +360,27 @@ def save_file():
         save_new_text_2.write(plain_text_content)
         window.lb_saved.setHidden(False)
         window.lb_saved_text.setHidden(False)
+
+
+def open_help():
+    Instanz_Hilfe = Help()
+
+    with open("help.txt", "r", encoding="utf-8") as ht:
+        helptextfile = ht.read()
+        Instanz_Hilfe.helptext.setPlainText(helptextfile)
+
+    Instanz_Hilfe.exec()
+
+
+def open_version():
+    Instanz_Version = Help()
+
+    with open("changelog.txt", "r", encoding="utf-8") as cl:
+        changelogfile = cl.read()
+        print(changelogfile)
+        Instanz_Version.helptext.setPlainText(changelogfile)
+
+    Instanz_Version.exec()
 
 
 def main():

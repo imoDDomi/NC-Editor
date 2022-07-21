@@ -1,0 +1,7 @@
+v1.4 - Ordner Fonts in Auto-py-to-exe eingefügt
+     - Button "Start" geändert
+
+v1.5 - Menübar eingefügt
+	 - Hilfetext erstellt
+	 - Dialogfenster erstellt
+	 - Changelog eingefügt
