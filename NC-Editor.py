@@ -365,7 +365,7 @@ def save_file():
 def open_help():
     Instanz_Hilfe = Help()
 
-    with open("help.txt", "r", encoding="utf-8") as ht:
+    with open("textfiles/help.txt", "r", encoding="utf-8") as ht:
         helptextfile = ht.read()
         Instanz_Hilfe.helptext.setPlainText(helptextfile)
 
@@ -375,9 +375,8 @@ def open_help():
 def open_version():
     Instanz_Version = Help()
 
-    with open("changelog.txt", "r", encoding="utf-8") as cl:
+    with open("textfiles/changelog.txt", "r", encoding="utf-8") as cl:
         changelogfile = cl.read()
-        print(changelogfile)
         Instanz_Version.helptext.setPlainText(changelogfile)
 
     Instanz_Version.exec()
@@ -395,9 +394,3 @@ sys.exit(app.exec())
 
 if __name__ == "__main__":
     main()
-
-
-ToDo
-
-
-# https://stackoverflow.com/questions/24287111/changing-a-single-strings-color-within-a-qtextedit
