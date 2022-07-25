@@ -1,0 +1,7 @@
+TODO:
+
+- Schrittweite = 0 nicht erlaubt
+- Startnummer einziffrig nicht erlaubt
+- Button Speichern und Speichern unter ausblenden wenn Ordner angewählt wird
+
+Hilfe anpassen
