@@ -38,7 +38,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
 
         self.rb_directory.clicked.connect(disable_IDS_checkbox)
         self.rb_file.clicked.connect(enable_IDS_checkbox)
-        self.lb_version.setText("v1.5 Dominik Polo")
+        self.lb_version.setText("v1.6 Dominik Polo")
         self.pb_reset_file.clicked.connect(reset_file)
 
 
@@ -53,7 +53,7 @@ class Help(QDialog, Ui_Hilfe):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.helptext.setFont(QFont("JetBrains Mono", 10))
+        self.helptext.setFont(QFont("Calibri", 13))
 
 
 # hier werden Funktionen definiert
@@ -61,10 +61,14 @@ class Help(QDialog, Ui_Hilfe):
 
 def disable_IDS_checkbox():
     window.cb_ids.setEnabled(False)
+    window.pb_save.setEnabled(False)
+    window.pb_save_as.setEnabled(False)
 
 
 def enable_IDS_checkbox():
     window.cb_ids.setEnabled(True)
+    window.pb_save.setEnabled(True)
+    window.pb_save_as.setEnabled(True)
 
 
 def check_config():

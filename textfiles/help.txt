@@ -14,9 +14,11 @@ Die aktuell geöffnete Datei/Ordner wird als Pfad angezeigt
 
 
 Die Option Satznummern nummeriert die Zeilen des NC-Programms neu
-Es werden nur Zeilennummern im Format Nxxx ersetzt,
+Es werden nur Zeilennummern im Format Nxx... ersetzt,
 d.h. keine Nummerierungen hinzugefügt wo vorher auch keine waren
+Ersetzt werden nur N gefolgt von mindestens 2 Ziffern. Z.B. N1 wird nicht ersetzt, N10 schon
 Es werden keine Kommentare geändert
+Schrittweite darf nicht 0 sein
 
 Die Option IDS Nummern nummeriert statische Synchronaktionen im Format IDS=xxx neu
 
@@ -34,4 +36,5 @@ Gestartet wird der Check/Nummerierung über den Button "Start"
 
 Der Button "Speichern" sichert die Datei sofort und überschreibt den angegebenen Pfad
 Mit "Speichern unter" kann ein neuer Speicherort gewählt werden
+Bei Auswahl "Ordner" wird nach drücken des "Start" Buttons automatisch jede Datei bearbeitet und gespeichert
 
