@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Hilfe</class>
+ <widget class="QDialog" name="Hilfe">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>898</width>
+    <height>549</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Hilfe</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icons/fragezeichen.png</normaloff>icons/fragezeichen.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+background-color: rgb(255,255,255);
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QPlainTextEdit" name="helptext">
+     <property name="cursor" stdset="0">
+      <cursorShape>ArrowCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPlainTextEdit{
+border: 0;
+}</string>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

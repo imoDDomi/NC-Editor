@@ -11,25 +11,34 @@
 from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
     QMetaObject, QObject, QPoint, QRect,
     QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QGridLayout,
     QGroupBox, QLabel, QLineEdit, QMainWindow,
-    QPlainTextEdit, QProgressBar, QPushButton, QRadioButton,
-    QSizePolicy, QSpacerItem, QSpinBox, QStatusBar,
-    QVBoxLayout, QWidget)
+    QMenu, QMenuBar, QPlainTextEdit, QProgressBar,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QSpinBox, QStatusBar, QVBoxLayout, QWidget)
 
 class Ui_Hauptfenster(object):
     def setupUi(self, Hauptfenster):
         if not Hauptfenster.objectName():
             Hauptfenster.setObjectName(u"Hauptfenster")
-        Hauptfenster.resize(831, 735)
+        Hauptfenster.resize(831, 736)
         icon = QIcon()
         icon.addFile(u"icons/lvt.png", QSize(), QIcon.Normal, QIcon.Off)
         Hauptfenster.setWindowIcon(icon)
         Hauptfenster.setStyleSheet(u"")
+        self.actionAnleitung = QAction(Hauptfenster)
+        self.actionAnleitung.setObjectName(u"actionAnleitung")
+        self.actionAnleitung_2 = QAction(Hauptfenster)
+        self.actionAnleitung_2.setObjectName(u"actionAnleitung_2")
+        self.mb_info = QAction(Hauptfenster)
+        self.mb_info.setObjectName(u"mb_info")
+        self.mb_version = QAction(Hauptfenster)
+        self.mb_version.setObjectName(u"mb_version")
         self.centralwidget = QWidget(Hauptfenster)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -71,6 +80,7 @@ class Ui_Hauptfenster(object):
         self.sb_startnummer = QSpinBox(self.groupBox)
         self.sb_startnummer.setObjectName(u"sb_startnummer")
         self.sb_startnummer.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.sb_startnummer.setMinimum(10)
         self.sb_startnummer.setMaximum(10000)
         self.sb_startnummer.setSingleStep(100)
         self.sb_startnummer.setValue(1000)
@@ -100,7 +110,7 @@ class Ui_Hauptfenster(object):
         self.sb_schrittweite = QSpinBox(self.groupBox)
         self.sb_schrittweite.setObjectName(u"sb_schrittweite")
         self.sb_schrittweite.setStyleSheet(u"color: rgb(0, 0, 0);")
-        self.sb_schrittweite.setMinimum(0)
+        self.sb_schrittweite.setMinimum(1)
         self.sb_schrittweite.setMaximum(1000)
         self.sb_schrittweite.setValue(10)
 
@@ -134,7 +144,7 @@ class Ui_Hauptfenster(object):
 
         self.pb_check_program = QPushButton(self.groupBox)
         self.pb_check_program.setObjectName(u"pb_check_program")
-        self.pb_check_program.setStyleSheet(u"*{\n"
+        self.pb_check_program.setStyleSheet(u"QPushButton{\n"
 "	color: rgb(0, 0, 0);\n"
 "	background-color: rgb(255, 255, 0);\n"
 "	border-style: solid;\n"
@@ -150,7 +160,6 @@ class Ui_Hauptfenster(object):
 "background-color: rgb(200, 200, 0);\n"
 "border-color: rgb(200, 200, 0);\n"
 "}\n"
-"\n"
 "")
 
         self.gridLayout_2.addWidget(self.pb_check_program, 3, 2, 1, 1)
@@ -211,7 +220,7 @@ class Ui_Hauptfenster(object):
 #endif
         self.textbrowser.setPalette(palette)
         font = QFont()
-        font.setPointSize(10)
+        font.setPointSize(15)
         self.textbrowser.setFont(font)
         self.textbrowser.viewport().setProperty("cursor", QCursor(Qt.IBeamCursor))
         self.textbrowser.setFrameShape(QFrame.NoFrame)
@@ -269,6 +278,16 @@ class Ui_Hauptfenster(object):
         self.statusbar = QStatusBar(Hauptfenster)
         self.statusbar.setObjectName(u"statusbar")
         Hauptfenster.setStatusBar(self.statusbar)
+        self.menubar = QMenuBar(Hauptfenster)
+        self.menubar.setObjectName(u"menubar")
+        self.menubar.setGeometry(QRect(0, 0, 831, 22))
+        self.mb_hilfe = QMenu(self.menubar)
+        self.mb_hilfe.setObjectName(u"mb_hilfe")
+        Hauptfenster.setMenuBar(self.menubar)
+
+        self.menubar.addAction(self.mb_hilfe.menuAction())
+        self.mb_hilfe.addAction(self.mb_info)
+        self.mb_hilfe.addAction(self.mb_version)
 
         self.retranslateUi(Hauptfenster)
 
@@ -277,23 +296,61 @@ class Ui_Hauptfenster(object):
 
     def retranslateUi(self, Hauptfenster):
         Hauptfenster.setWindowTitle(QCoreApplication.translate("Hauptfenster", u"NC-Checker", None))
+        self.actionAnleitung.setText(QCoreApplication.translate("Hauptfenster", u"Anleitung", None))
+        self.actionAnleitung_2.setText(QCoreApplication.translate("Hauptfenster", u"Anleitung", None))
+        self.mb_info.setText(QCoreApplication.translate("Hauptfenster", u"Info", None))
+        self.mb_version.setText(QCoreApplication.translate("Hauptfenster", u"Version", None))
         self.rb_file.setText(QCoreApplication.translate("Hauptfenster", u"Datei ausw\u00e4hlen", None))
+#if QT_CONFIG(tooltip)
+        self.le_input.setToolTip(QCoreApplication.translate("Hauptfenster", u"Pfad zur Datei", None))
+#endif // QT_CONFIG(tooltip)
         self.le_input.setText("")
         self.le_input.setPlaceholderText(QCoreApplication.translate("Hauptfenster", u"NC Programm Pfad", None))
         self.groupBox.setTitle(QCoreApplication.translate("Hauptfenster", u"Setup", None))
+#if QT_CONFIG(tooltip)
+        self.sb_startnummer.setToolTip(QCoreApplication.translate("Hauptfenster", u"Werte zwischen 10 und 10.000 erlaubt", None))
+#endif // QT_CONFIG(tooltip)
         self.lb_version.setText(QCoreApplication.translate("Hauptfenster", u"Version", None))
         self.lb_saved.setText("")
+#if QT_CONFIG(tooltip)
+        self.sb_schrittweite.setToolTip(QCoreApplication.translate("Hauptfenster", u"Werte zwischen 1 und 1.000 erlaubt", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.cb_klammern.setToolTip(QCoreApplication.translate("Hauptfenster", u"Checkt Anzahl Klammern auf/zu pro Zeile", None))
+#endif // QT_CONFIG(tooltip)
         self.cb_klammern.setText(QCoreApplication.translate("Hauptfenster", u"Klammern", None))
+#if QT_CONFIG(tooltip)
+        self.pb_save_as.setToolTip(QCoreApplication.translate("Hauptfenster", u"Speicherort w\u00e4hlbar", None))
+#endif // QT_CONFIG(tooltip)
         self.pb_save_as.setText(QCoreApplication.translate("Hauptfenster", u"Speichern unter", None))
+#if QT_CONFIG(tooltip)
+        self.cb_satznummern.setToolTip(QCoreApplication.translate("Hauptfenster", u"Nummeriert die Satznummern neu aber keine Kommentare. Erstellt keine neuen Satznummern.", None))
+#endif // QT_CONFIG(tooltip)
         self.cb_satznummern.setText(QCoreApplication.translate("Hauptfenster", u"Satznummern", None))
         self.lb_saved_text.setText(QCoreApplication.translate("Hauptfenster", u"gespeichert!", None))
-        self.pb_check_program.setText(QCoreApplication.translate("Hauptfenster", u"Check NC-Programm", None))
+#if QT_CONFIG(tooltip)
+        self.pb_check_program.setToolTip(QCoreApplication.translate("Hauptfenster", u"Bearbeitet das NC Programm je nach Auswahl", None))
+#endif // QT_CONFIG(tooltip)
+        self.pb_check_program.setText(QCoreApplication.translate("Hauptfenster", u"Start", None))
         self.lb_schrittweite.setText(QCoreApplication.translate("Hauptfenster", u"Schrittweite", None))
+#if QT_CONFIG(tooltip)
+        self.cb_ids.setToolTip(QCoreApplication.translate("Hauptfenster", u"IDS Nummern f\u00fcr z.B. SAFE Programme", None))
+#endif // QT_CONFIG(tooltip)
         self.cb_ids.setText(QCoreApplication.translate("Hauptfenster", u"IDS Nummern", None))
         self.lb_startnummer.setText(QCoreApplication.translate("Hauptfenster", u"Startnummer", None))
+#if QT_CONFIG(tooltip)
+        self.pb_save.setToolTip(QCoreApplication.translate("Hauptfenster", u"\u00fcberschreibt sofort die gew\u00e4hlte Datei", None))
+#endif // QT_CONFIG(tooltip)
         self.pb_save.setText(QCoreApplication.translate("Hauptfenster", u"Speichern", None))
         self.textbrowser.setPlaceholderText("")
         self.rb_directory.setText(QCoreApplication.translate("Hauptfenster", u"Ordner ausw\u00e4hlen", None))
+#if QT_CONFIG(tooltip)
+        self.pb_quelle.setToolTip(QCoreApplication.translate("Hauptfenster", u"Quelle ausw\u00e4hlen", None))
+#endif // QT_CONFIG(tooltip)
         self.pb_quelle.setText(QCoreApplication.translate("Hauptfenster", u"Quelle", None))
+#if QT_CONFIG(tooltip)
+        self.pb_reset_file.setToolTip(QCoreApplication.translate("Hauptfenster", u"Datei zur\u00fccksetzen", None))
+#endif // QT_CONFIG(tooltip)
+        self.mb_hilfe.setTitle(QCoreApplication.translate("Hauptfenster", u"Hilfe", None))
     # retranslateUi
 

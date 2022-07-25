@@ -1,0 +1,40 @@
+Mit dem NC-Editor können NC-Programme (SPF, MPF, DEF) geprüft werden
+
+
+
+Auswahl ob Datei oder alle Dateien in einem Ordner bearbeitet werden sollen
+
+
+
+Mit dem Button "Quelle" kann eine Datei oder ein ganzer Ordner gewählt werden, je nach Auswahl
+
+"Reset" links neben "Quelle" setzt die Datei zurück
+
+Die aktuell geöffnete Datei/Ordner wird als Pfad angezeigt
+
+
+Die Option Satznummern nummeriert die Zeilen des NC-Programms neu
+Es werden nur Zeilennummern im Format Nxx... ersetzt,
+d.h. keine Nummerierungen hinzugefügt wo vorher auch keine waren
+Ersetzt werden nur N gefolgt von mindestens 2 Ziffern. Z.B. N1 wird nicht ersetzt, N10 schon
+Es werden keine Kommentare geändert
+Schrittweite darf nicht 0 sein
+
+Die Option IDS Nummern nummeriert statische Synchronaktionen im Format IDS=xxx neu
+
+Beide Optionen beziehen sich auf die Eingabefelder "Startnummer" und "Schrittweite"
+
+
+
+Die Option Klammern überprüft wie oft pro Zeile Klammern auf und wieder zu gingen. Findet nur Fehler innerhalb einer Zeile.
+
+
+
+Gestartet wird der Check/Nummerierung über den Button "Start"
+
+
+
+Der Button "Speichern" sichert die Datei sofort und überschreibt den angegebenen Pfad
+Mit "Speichern unter" kann ein neuer Speicherort gewählt werden
+Bei Auswahl "Ordner" wird nach drücken des "Start" Buttons automatisch jede Datei bearbeitet und gespeichert
+

@@ -1,0 +1,17 @@
+v1.4 
+
+- Ordner Fonts in Auto-py-to-exe eingefügt
+- Button "Start" geändert
+
+v1.5 
+
+- Menübar eingefügt
+- Hilfetext erstellt
+- Dialogfenster erstellt
+- Changelog eingefügt
+
+v1.6 
+
+- Schrittweite untere Grenze > 0 in .ui Datei eingestellt
+- Startnummer untere Grenze >= 10 in .ui Datei eingestellt
+- Button "Speichern" und "Speichern unter" disablen wenn Ordner angewählt wird
