@@ -17,7 +17,7 @@ Die Option Satznummern nummeriert die Zeilen des NC-Programms neu
 Es werden nur Zeilennummern im Format Nxx... ersetzt,
 d.h. keine Nummerierungen hinzugefügt wo vorher auch keine waren
 Ersetzt werden nur N gefolgt von mindestens 2 Ziffern. Z.B. N1 wird nicht ersetzt, N10 schon
-Es werden keine Kommentare geändert
+
 Schrittweite darf nicht 0 sein
 
 Die Option IDS Nummern nummeriert statische Synchronaktionen im Format IDS=xxx neu
