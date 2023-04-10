@@ -19,3 +19,10 @@ v1.6
 v1.7
 
 - Hilfe angepasst
+
+v2.0
+
+- Funktionen in Klasse verschoben um alles mit self.xxx ansprechen zu können
+- Buttons komplett disabled wenn Radiobutton auf Ordner steht
+- saved Symbol entfernt wenn text geändert wurde
+- Text kann jetzt nachträglich geändert werden und mit speichern wird aktuelles Fenster korrekt gespeichert
