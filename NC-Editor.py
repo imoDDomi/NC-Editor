@@ -108,7 +108,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
                 Satznummern_string = rf.read()
                 self.textbrowser.setPlainText(Satznummern_string)
 
-            with open(fname[0], "r") as rf_2:
+            with open(fname[0], "r", encoding="utf-8") as rf_2:
                 Satznummern_liste = rf_2.readlines()
 
         if self.rb_directory.isChecked():
@@ -152,7 +152,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         for i in files_Satznummern_liste:
             current_file_name = i
 
-            with open(directory_path + current_file_name, "r") as q:
+            with open(directory_path + current_file_name, "r", encoding="utf-8") as q:
                 lokal_Satznummern_liste = q.readlines()
 
             line_offset = 0
@@ -164,14 +164,14 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
                     lokal_Satznummern_liste[l],
                 )
                 Liste_fertig.append(x)
-                if re.match("N" + "\d" + "\d" + "\d*", lokal_Satznummern_liste[l]):
+                if re.search("N" + "\d" + "\d" + "\d*", lokal_Satznummern_liste[l]):
                     line_offset += self.sb_schrittweite.value()
 
                 l += 1
                 s = Liste_fertig
             Liste_fertig = []
 
-            with open(directory_path + current_file_name, "w") as save_new_text:
+            with open(directory_path + current_file_name, "w", encoding="utf-8") as save_new_text:
                 for item in s:
                     save_new_text.write("%s" % item)
             g += 1
@@ -193,7 +193,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         for c in files_Satznummern_liste:
             current_file_name = c
 
-            with open(directory_path + current_file_name, "r") as q:
+            with open(directory_path + current_file_name, "r", encoding="utf-8") as q:
                 lokal_Satznummern_liste = q.readlines()
 
             i = 0
@@ -232,7 +232,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         i = 0
         x = []
         Liste_fertig = []
-
+        print(Satznummern_liste)
         for s in Satznummern_liste:
             x = re.sub(
                 "N" + "\d" + "\d" + "\d*",
@@ -240,8 +240,9 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
                 Satznummern_liste[i],
             )
             Liste_fertig.append(x)
-            if re.match("N" + "\d" + "\d" + "\d*", Satznummern_liste[i]):
+            if re.search("N" + "\d" + "\d" + "\d*", Satznummern_liste[i]):
                 line_offset += self.sb_schrittweite.value()
+                print("ersetzt" + Satznummern_liste[i])
             i += 1
         Satznummern_liste = Liste_fertig
         Satznummern_string = "".join(Liste_fertig)
@@ -292,7 +293,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         i = 0
         x = []
         Liste_fertig = []
-        pattern = "^IDS=\s?\d*"
+        pattern = "IDS=\s?\d*"
 
         for s in Satznummern_liste:
             x = re.sub(
@@ -301,7 +302,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
                 Satznummern_liste[i],
             )
             Liste_fertig.append(x)
-            if re.match(pattern, Satznummern_liste[i]):
+            if re.search(pattern, Satznummern_liste[i]):
                 line_offset += self.sb_schrittweite.value()
             i += 1
 

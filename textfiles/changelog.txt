@@ -26,3 +26,8 @@ v2.0
 - Buttons komplett disabled wenn Radiobutton auf Ordner steht
 - saved Symbol entfernt wenn text geändert wurde
 - Text kann jetzt nachträglich geändert werden und mit speichern wird aktuelles Fenster korrekt gespeichert
+
+v2.1
+
+- Match ersetzt durch search, damit Kommentare richtig ersetzt werden
+- IDS werden jetzt auch Kommentare ersetzt
