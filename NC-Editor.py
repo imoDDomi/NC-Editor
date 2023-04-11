@@ -34,7 +34,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         self.pb_save.clicked.connect(self.save_file)
         self.mb_info.triggered.connect(self.open_help)
         self.mb_version.triggered.connect(self.open_version)
-        self.lb_saved.setHidden(True)  # Button saved ausblenden weil Domi zu blöd zum einstellen im Designer ist
+        self.lb_saved.setHidden(True)
         self.lb_saved_text.setHidden(True)
         self.textbrowser.textChanged.connect(self.hide_saved_labels)
 
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
 
         self.rb_directory.clicked.connect(self.disable_Buttons)
         self.rb_file.clicked.connect(self.enable_Buttons)
-        self.lb_version.setText("v2.0 Dominik Polo")
+        self.lb_version.setText("v2.1 Dominik Polo")
         self.pb_reset_file.clicked.connect(self.reset_file)
 
     # hier werden Funktionen definiert
