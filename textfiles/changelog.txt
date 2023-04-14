@@ -31,3 +31,9 @@ v2.1
 
 - Match ersetzt durch search, damit Kommentare richtig ersetzt werden
 - IDS werden jetzt auch Kommentare ersetzt
+
+v2.2
+
+- Programmstruktur geändert
+- Hilfe und PopUp Klassen in eigene Programme verschoben
+- requirements.txt erstellt

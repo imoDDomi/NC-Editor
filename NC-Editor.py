@@ -5,24 +5,20 @@ import os
 import re
 import sys
 
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont, QFontDatabase, QGuiApplication
+# from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont, QFontDatabase
+from PySide6.QtWidgets import QApplication, QFileDialog, QMainWindow
 
-# from os import* MERKE! niemals alles importieren, hat standard openfile mit os.openfile() überschrieben :(
-from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QMainWindow
-
-from help import Ui_Hilfe
-from nc_editor_mainwindow import Ui_Hauptfenster
-from PopUpBracketCheck import Ui_PopUpBracketCheck
-
-# in exe umwandeln:
-# auto-py-to-exe
+from help.help import Help
+from MainWindow.UI.nc_editor_mainwindow import Ui_Hauptfenster
+from PopUp_Dialog.bracket_check_PopUp import PopUp
 
 
-class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. programmiert, alles was auf geerbte Klasse Ui_Hauptfenster zurückgreift
+class MainWindow(QMainWindow, Ui_Hauptfenster):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.lb_version.setText("v2.2 Dominik Polo")
         QFontDatabase.addApplicationFont("fonts/JetBrainsMono-Regular.ttf")
         # QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.Round)
 
@@ -42,25 +38,26 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
 
         self.rb_directory.clicked.connect(self.disable_Buttons)
         self.rb_file.clicked.connect(self.enable_Buttons)
-        self.lb_version.setText("v2.1 Dominik Polo")
-        self.pb_reset_file.clicked.connect(self.reset_file)
 
-    # hier werden Funktionen definiert
+        self.pb_reset_file.clicked.connect(self.reset_file)
 
     def hide_saved_labels(self):
         self.lb_saved.setHidden(True)
         self.lb_saved_text.setHidden(True)
 
     def disable_Buttons(self):
-        self.cb_ids.hide()
-        self.pb_save.hide()
-        self.pb_save_as.hide()
+        self.cb_ids.setDisabled(True)
+        self.pb_save.setDisabled(True)
+        self.pb_save_as.setDisabled(True)
+        self.textbrowser.setReadOnly(True)
         # self.pb_reset_file.hide()
 
     def enable_Buttons(self):
-        self.cb_ids.show()
-        self.pb_save.show()
-        self.pb_save_as.show()
+        self.cb_ids.setDisabled(False)
+        self.pb_save.setDisabled(False)
+        self.pb_save_as.setDisabled(False)
+        self.textbrowser.setReadOnly(False)
+        self.textbrowser.clear()
         # self.pb_reset_file.show()
 
     def check_config(self):
@@ -82,9 +79,12 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
                 self.check_brackets_in_dir()
 
     def reset_file(self):
-        with open(Path_single_file, "r", encoding="utf-8") as rf:
-            Satznummern_string = rf.read()
-            self.textbrowser.setPlainText(Satznummern_string)
+        if not self.textbrowser.toPlainText() == "":
+            with open(Path_single_file, "r", encoding="utf-8") as rf:
+                Satznummern_string = rf.read()
+                self.textbrowser.setPlainText(Satznummern_string)
+        else:
+            return
 
     def open_file(self):  # open file
         global Satznummern_liste
@@ -98,7 +98,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
             fname = QFileDialog.getOpenFileName(
                 None,
                 "NC Programme auswählen",
-                "C:/Users/domin/Desktop/NC Programme",
+                "",
                 "NC Programme (*.SPF *.MPF *.DEF)",
             )
             self.le_input.setText(fname[0])
@@ -112,7 +112,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
                 Satznummern_liste = rf_2.readlines()
 
         if self.rb_directory.isChecked():
-            files = QFileDialog.getExistingDirectory(None, "NC Programm Ordner auswählen", "C:/Users/Dominik/Desktop/CNC")
+            files = QFileDialog.getExistingDirectory(None, "NC Programm Ordner auswählen", "")
             self.le_input.setText(files)
             raw_files_Satznummern_liste = os.listdir(files)
 
@@ -186,7 +186,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         self.lb_saved_text.setHidden(False)
 
     def check_brackets_in_dir(self):
-        Instanz_PopUp2 = PopUp()
+        PopUp_in_dir_instance = PopUp()
         Fehlerzeilennummer = []
         i = 0
 
@@ -216,12 +216,12 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
 
         if len(Fehlerzeilennummer) > 0:
             str3 = "".join(Fehlerzeilennummer)
-            Instanz_PopUp2.tb_popup.setText(str3)
-            Instanz_PopUp2.exec()
+            PopUp_in_dir_instance.tb_popup.setText(str3)
+            PopUp_in_dir_instance.exec()
 
         if len(Fehlerzeilennummer) == 0:
-            Instanz_PopUp2.tb_popup.setText("Keine Fehler gefunden")
-            Instanz_PopUp2.exec()
+            PopUp_in_dir_instance.tb_popup.setText("Keine Fehler gefunden")
+            PopUp_in_dir_instance.exec()
 
     def correct_lines(self):
         global Satznummern_liste
@@ -232,7 +232,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         i = 0
         x = []
         Liste_fertig = []
-        print(Satznummern_liste)
+
         for s in Satznummern_liste:
             x = re.sub(
                 "N" + "\d" + "\d" + "\d*",
@@ -242,7 +242,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
             Liste_fertig.append(x)
             if re.search("N" + "\d" + "\d" + "\d*", Satznummern_liste[i]):
                 line_offset += self.sb_schrittweite.value()
-                print("ersetzt" + Satznummern_liste[i])
+
             i += 1
         Satznummern_liste = Liste_fertig
         Satznummern_string = "".join(Liste_fertig)
@@ -255,7 +255,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
         self.lb_saved.setHidden(True)
         self.lb_saved_text.setHidden(True)
 
-        Instanz_PopUp = PopUp()
+        self.PopUp_instance = PopUp()
         i = 0
         Fehlerzeilennummer = []
         cut_Satznummern_liste_without_line_comments_list = []
@@ -275,12 +275,12 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
 
         if len(Fehlerzeilennummer) > 0:
             str2 = "".join(Fehlerzeilennummer)
-            Instanz_PopUp.tb_popup.setText(str2)
-            Instanz_PopUp.exec()
+            self.PopUp_instance.tb_popup.setText(str2)
+            self.PopUp_instance.exec()
 
         if len(Fehlerzeilennummer) == 0:
-            Instanz_PopUp.tb_popup.setText("Keine Fehler gefunden")
-            Instanz_PopUp.exec()
+            self.PopUp_instance.tb_popup.setText("Keine Fehler gefunden")
+            self.PopUp_instance.exec()
 
     def check_IDS(self):
         global Satznummern_liste
@@ -334,44 +334,18 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):  # hier werden Pushbuttons usw. 
             self.lb_saved_text.setHidden(False)
 
     def open_help(self):
-        Instanz_Hilfe = Help()
-
-        with open("textfiles/help.txt", "r", encoding="utf-8") as ht:
-            helptextfile = ht.read()
-            Instanz_Hilfe.helptext.setPlainText(helptextfile)
-
-        Instanz_Hilfe.exec()
+        self.help_instance = Help()
+        self.help_instance.open_help(helptext=True)
+        self.help_instance.exec()
 
     def open_version(self):
-        Instanz_Version = Help()
-
-        with open("textfiles/changelog.txt", "r", encoding="utf-8") as cl:
-            changelogfile = cl.read()
-            Instanz_Version.helptext.setPlainText(changelogfile)
-
-        Instanz_Version.exec()
-
-
-class PopUp(QDialog, Ui_PopUpBracketCheck):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.tb_popup.setFont("JetBrains Mono NL Light")
-
-
-class Help(QDialog, Ui_Hilfe):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-        self.helptext.setFont(QFont("Calibri", 13))
-
-
-def main():
-    app = QApplication([])
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
+        self.help_instance = Help()
+        self.help_instance.open_help(helptext=False)
+        self.help_instance.exec()
 
 
 if __name__ == "__main__":
-    main()
+    app = QApplication()
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())
