@@ -3,6 +3,9 @@ __pycache__/
 fertiges Programm/
 *.py[cod]
 *$py.class
+README.md 
+LICENSE
+
 
 # C extensions
 *.so
