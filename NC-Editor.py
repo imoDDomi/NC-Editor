@@ -18,7 +18,7 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.lb_version.setText("v2.2 Dominik Polo")
+        self.lb_version.setText("v2.3 Dominik Polo")
         QFontDatabase.addApplicationFont("fonts/JetBrainsMono-Regular.ttf")
         # QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.Round)
 
@@ -33,6 +33,8 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):
         self.lb_saved.setHidden(True)
         self.lb_saved_text.setHidden(True)
         self.textbrowser.textChanged.connect(self.hide_saved_labels)
+        self.cb_satznummern.stateChanged.connect(self.preset_values_N)
+        self.cb_ids.stateChanged.connect(self.preset_values_IDS)
 
         self.progressBar.setHidden(True)
 
@@ -44,6 +46,18 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):
     def hide_saved_labels(self):
         self.lb_saved.setHidden(True)
         self.lb_saved_text.setHidden(True)
+
+    def preset_values_N(self):
+        if self.cb_satznummern.isChecked():
+            self.sb_startnummer.setValue(1000)
+            self.sb_schrittweite.setValue(10)
+            self.cb_ids.setChecked(False)
+
+    def preset_values_IDS(self):
+        if self.cb_ids.isChecked():
+            self.sb_startnummer.setValue(100)
+            self.sb_schrittweite.setValue(1)
+            self.cb_satznummern.setChecked(False)
 
     def disable_Buttons(self):
         self.cb_ids.setDisabled(True)
@@ -290,21 +304,21 @@ class MainWindow(QMainWindow, Ui_Hauptfenster):
         self.lb_saved_text.setHidden(True)
 
         line_offset = 0
-        i = 0
-        x = []
-        Liste_fertig = []
-        pattern = "IDS=\s?\d*"
+        start_number = self.sb_startnummer.value()
+        step_size = self.sb_schrittweite.value()
 
-        for s in Satznummern_liste:
-            x = re.sub(
-                pattern,
-                "IDS" + "=" + str(self.sb_startnummer.value() + line_offset),
-                Satznummern_liste[i],
-            )
-            Liste_fertig.append(x)
-            if re.search(pattern, Satznummern_liste[i]):
-                line_offset += self.sb_schrittweite.value()
-            i += 1
+        pattern = "IDS\s*=\s*(\d+)"
+
+        Liste_fertig = []
+
+        for line in Satznummern_liste:
+            match = re.search(pattern, line)
+            if ";" not in line:
+                if match:
+                    new_number = start_number + line_offset
+                    line = re.sub(pattern, f"IDS={new_number}", line)
+                    line_offset += step_size
+            Liste_fertig.append(line)
 
         Satznummern_liste = Liste_fertig
         Satznummern_string = "".join(Liste_fertig)

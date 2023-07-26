@@ -37,3 +37,8 @@ v2.2
 - Programmstruktur geändert
 - Hilfe und PopUp Klassen in eigene Programme verschoben
 - requirements.txt erstellt
+
+v2.3 
+
+- fixed IDS check
+- Vorbelegte Werte für Satznummern und Schrittweite je nach checkbox
