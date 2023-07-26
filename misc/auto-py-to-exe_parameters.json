@@ -7,7 +7,7 @@
   },
   {
    "optionDest": "filenames",
-   "value": "C:/Github-Repos/NC-Editor/NC-Editor.py"
+   "value": "C:/Python/NC-Editor/NC-Editor.py"
   },
   {
    "optionDest": "onefile",
@@ -19,7 +19,7 @@
   },
   {
    "optionDest": "icon_file",
-   "value": "C:/Github-Repos/NC-Editor/icons/lvt_gro\u00df.ico"
+   "value": "C:/Python/NC-Editor/icons/lvt_gro\u00df.ico"
   },
   {
    "optionDest": "ascii",
@@ -71,23 +71,27 @@
   },
   {
    "optionDest": "datas",
-   "value": "C:/Github-Repos/NC-Editor/icons;icons/"
+   "value": "C:/Python/NC-Editor/fonts;fonts/"
   },
   {
    "optionDest": "datas",
-   "value": "C:/Github-Repos/NC-Editor/nc_editor_mainwindow.py;."
+   "value": "C:/Python/NC-Editor/icons;icons/"
   },
   {
    "optionDest": "datas",
-   "value": "C:/Github-Repos/NC-Editor/PopUpBracketCheck.py;."
+   "value": "C:/Python/NC-Editor/MainWindow/UI/nc_editor_mainwindow.py;."
   },
   {
    "optionDest": "datas",
-   "value": "C:/Github-Repos/NC-Editor/fonts;fonts/"
+   "value": "C:/Python/NC-Editor/PopUp_Dialog/bracket_check_PopUp.py;."
   },
   {
    "optionDest": "datas",
-   "value": "C:/Github-Repos/NC-Editor/textfiles;textfiles/"
+   "value": "C:/Python/NC-Editor/help/help.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Python/NC-Editor/textfiles;textfiles/"
   }
  ],
  "nonPyinstallerOptions": {
